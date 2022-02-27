@@ -26,8 +26,8 @@ while :; do
 done
 
 cd "${projectRoot}"
-code ./acknowledgement-trigger && \
-  code ./validate-checksum && \
+code ./validate-checksum && \
   code ./transfer-trigger && \
   code ./file-transfer && \
-  code ./create-acknowledgement
+  code ./create-acknowledgement && \
+  code ./acknowledgement-trigger
