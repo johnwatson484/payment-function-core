@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+# Clone repositories managed by this project
+set -e
+projectRoot=$(a="/$0"; a=${a%/*}; a=${a:-.}; a=${a#/}/; cd "$a/.." || return; pwd)
+
+(
+  cd "${projectRoot}"
+
+  printf "\nCloning repositories\n"
+
+  test -d validate-checksum\
+    && >&2 echo "The 'validate-checksum' repository already exists. Skipping." \
+    || git clone https://github.com/DEFRA/validate-checksum.git
+  test -d transfer-trigger\
+    && >&2 echo "The 'transfer-trigger' repository already exists. Skipping." \
+    || git clone https://github.com/DEFRA/transfer-trigger.git
+  test -d file-transfer\
+    && >&2 echo "The 'file-transfer' repository already exists. Skipping." \
+    || git clone https://github.com/DEFRA/file-transfer.git
+  test -d create-acknowledgement\
+    && >&2 echo "The 'create-acknowledgement' repository already exists. Skipping." \
+    || git clone https://github.com/DEFRA/create-acknowledgement.git
+  test -d acknowledgement-trigger\
+    && >&2 echo "The 'acknowledgement-trigger' repository already exists. Skipping." \
+    || git clone https://github.com/DEFRA/acknowledgement-trigger.git
+)

@@ -1,0 +1,47 @@
+#!/usr/bin/env sh
+set -e
+projectRoot="$(a="/$0"; a=${a%/*}; a=${a:-.}; a=${a#/}/; cd "$a/.." || return; pwd)"
+
+show_help() {
+  echo "
+    Usage: scripts/test [OPTION...]
+    Update services.
+
+    Options:
+      -h, --help       display this help text
+    "
+}
+
+while :; do
+  case $1 in
+    -h|--help)   # Call a "show_help" function to display a synopsis, then exit.
+      show_help
+      exit
+      ;;
+    *)
+      break
+  esac
+
+  shift
+done
+
+cd "${projectRoot}"
+cd ./acknowledgement-trigger && \
+  git checkout main && \
+  git pull
+cd "${projectRoot}"
+cd ./validate-checksum && \
+  git checkout main && \
+  git pull
+cd "${projectRoot}"
+cd ./transfer-trigger && \
+  git checkout main && \
+  git pull
+cd "${projectRoot}"
+cd ./file-transfer && \
+  git checkout main && \
+  git pull
+cd "${projectRoot}"
+cd ./create-acknowledgement && \
+  git checkout main && \
+  git pull
